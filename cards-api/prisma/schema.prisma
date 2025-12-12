@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model MagisterCard {
+  id   Int      @id @default(autoincrement())
+  suit CardSuit
+  rank CardRank
+
+  magisterCardNames        MagisterCardName[]
+  magisterCardDescriptions MagisterCardDescription[]
+  magisterCardDivinations  MagisterCardDivination[]
+  magisterCardImages       MagisterCardImage[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("magister_cards")
+}
+
+model MagisterCardName {
+  id       Int      @id @default(autoincrement())
+  name     String   @db.VarChar(250)
+  slug     String   @unique @db.VarChar(300)
+  language Language
+
+  magisterCardId Int          @map("magister_card_id")
+  card           MagisterCard @relation(fields: [magisterCardId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("magister_cards_names")
+}
+
+model MagisterCardDescription {
+  id               Int      @id @default(autoincrement())
+  shortDescription String   @map("short_description") @db.VarChar(1000)
+  longDescription  String   @map("long_description") @db.VarChar(5000)
+  language         Language
+
+  magisterCardId Int          @map("magister_card_id")
+  card           MagisterCard @relation(fields: [magisterCardId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("magister_cards_descriptions")
+}
+
+model MagisterCardDivination {
+  id                       Int      @id @default(autoincrement())
+  divinatoryMeaning        String   @map("divinatory_meaning") @db.VarChar(1000)
+  divinatoryInterpretation String   @map("divinatory_interpretation") @db.VarChar(5000)
+  language                 Language
+
+  magisterCardId Int          @map("magister_card_id")
+  card           MagisterCard @relation(fields: [magisterCardId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("magister_cards_divinations")
+}
+
+model MagisterCardImage {
+  id       Int    @id @default(autoincrement())
+  imageUrl String @map("image_url") @db.VarChar(300)
+
+  magisterCardId Int          @map("magister_card_id")
+  card           MagisterCard @relation(fields: [magisterCardId], references: [id])
+  deckTypeId     Int          @map("deck_type_id")
+  deckType       DeckType     @relation(fields: [deckTypeId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("magister_cards_images")
+}
+
+model DeckType {
+  id   Int          @id @default(autoincrement())
+  name DeckTypeName
+
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @updatedAt @map("updated_at")
+  deletedAt          DateTime?           @map("deleted_at")
+  magisterCardImages MagisterCardImage[]
+
+  @@map("deck_types")
+}
+
+enum CardSuit {
+  SPADES
+  HEARTS
+  CLUBS
+  DIAMONDS
+
+  @@map("card_suit")
+}
+
+enum CardRank {
+  TWO
+  THREE
+  FOUR
+  FIVE
+  SIX
+  SEVEN
+  EIGHT
+  NINE
+  TEN
+  JACK
+  QUEEN
+  KING
+  ACE
+
+  @@map("card_rank")
+}
+
+enum Language {
+  BE
+  RU
+  EN
+
+  @@map("language")
+}
+
+enum DeckTypeName {
+  WITH_CAPTIONS
+  WITHOUT_CAPTIONS
+  METAPHORICAL
+
+  @@map("deck_type_name")
+}
