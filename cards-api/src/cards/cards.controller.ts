@@ -36,6 +36,8 @@ export class CardsController {
       rank: card.rank,
       name: card.magisterCardNames[0].name,
       slug: card.magisterCardNames[0].slug,
+      imageUrl: card.magisterCardImages[0].imageUrl,
+      coverUrl: 'cards/images/metaphorical/93x133-back+bleeds-3-mm.jpeg',
       shortDescription: card.magisterCardDescriptions[0].shortDescription,
     };
   }
@@ -68,6 +70,8 @@ export class CardsController {
       rank: card.rank,
       name: card.magisterCardNames[0].name,
       slug: card.magisterCardNames[0].slug,
+      imageUrl: card.magisterCardImages[0].imageUrl,
+      coverUrl: 'cards/images/metaphorical/93x133-back+bleeds-3-mm.jpeg',
       shortDescription: card.magisterCardDescriptions[0].shortDescription,
     };
   }

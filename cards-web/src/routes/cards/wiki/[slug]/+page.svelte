@@ -21,7 +21,7 @@
 	<h1 class="magister-h-one">{card.name}</h1>
 	<div class="card-image-wrapper">
 		<img
-			src="{API_URL}/{card.imageUrl}"
+			src="{API_URL}/static/{card.imageUrl}"
 			alt={card.name}
 			width="465"
 			height="665"

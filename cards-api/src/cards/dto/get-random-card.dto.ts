@@ -12,6 +12,12 @@ export class GetRandomCardDto {
   slug: string;
 
   @ApiProperty()
+  imageUrl: string;
+
+  @ApiProperty()
+  coverUrl: string;
+
+  @ApiProperty()
   suit: CardSuit;
 
   @ApiProperty()

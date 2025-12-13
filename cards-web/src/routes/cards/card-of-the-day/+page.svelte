@@ -41,7 +41,7 @@
 			<div class="card">
 				<div class="card-front">
 					<img
-						src="{API_URL}/{card.imageUrl}"
+						src="{API_URL}/static/{card.imageUrl}"
 						alt={card.name}
 						width="465"
 						height="665"
@@ -50,7 +50,7 @@
 				</div>
 				<div class="card-back">
 					<img
-						src="{API_URL}/{card.coverUrl}"
+						src="{API_URL}/static/{card.coverUrl}"
 						alt="Обложка карты {card.name}"
 						width="465"
 						height="665"

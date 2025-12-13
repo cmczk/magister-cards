@@ -139,6 +139,16 @@ export class CardsService {
             shortDescription: true,
           },
         },
+        magisterCardImages: {
+          where: {
+            deckType: {
+              name: 'METAPHORICAL',
+            },
+          },
+          select: {
+            imageUrl: true,
+          },
+        },
       },
     });
   }

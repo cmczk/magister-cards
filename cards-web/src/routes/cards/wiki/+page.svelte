@@ -33,7 +33,7 @@
 			<li>
 				<div class="card">
 					<img
-						src="{API_URL}/{card.imageUrl}"
+						src="{API_URL}/static/{card.imageUrl}"
 						class="card-img-top"
 						alt="Изображение карты {card.name}"
 						loading="lazy"
