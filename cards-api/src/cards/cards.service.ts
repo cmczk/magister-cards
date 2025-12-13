@@ -60,6 +60,55 @@ export class CardsService {
     });
   }
 
+  async getCardDetails(lang: Language, slug: string) {
+    return await this.prisma.magisterCardName.findUnique({
+      where: {
+        slug: slug,
+        language: lang,
+      },
+      select: {
+        name: true,
+        card: {
+          select: {
+            suit: true,
+            rank: true,
+            magisterCardDescriptions: {
+              where: {
+                language: lang,
+              },
+              take: 1,
+              select: {
+                shortDescription: true,
+                longDescription: true,
+              },
+            },
+            magisterCardDivinations: {
+              where: {
+                language: lang,
+              },
+              take: 1,
+              select: {
+                divinatoryMeaning: true,
+                divinatoryInterpretation: true,
+              },
+            },
+            magisterCardImages: {
+              where: {
+                deckType: {
+                  name: 'METAPHORICAL',
+                },
+              },
+              take: 1,
+              select: {
+                imageUrl: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   private async getRandomCard(seed: string | null, lang: Language) {
     const id = !seed
       ? randomInt(1, this.cardsInDeck + 1)

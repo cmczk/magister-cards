@@ -4,6 +4,7 @@ import { GetRandomCardDto } from './dto/get-random-card.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { toLanguageEnum } from 'src/utils/language';
 import { GetCardForWikiDto } from './dto/get-card-for-wiki.dto';
+import { GetCardDetails } from './dto/get-card-details.dto';
 
 @Controller('cards')
 export class CardsController {
@@ -90,5 +91,43 @@ export class CardsController {
       shortDescription: card.magisterCardDescriptions[0].shortDescription,
       imageUrl: card.magisterCardImages[0].imageUrl,
     }));
+  }
+
+  @ApiOperation({ summary: 'Получить информацию об отдельной карте' })
+  @ApiResponse({
+    status: 200,
+    description: 'Успешно возвращает полную информацию о карте',
+    type: GetCardDetails,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Информация о карте не найдена',
+  })
+  @Get(':lang/:slug')
+  async getCardDetails(
+    @Param('lang') lang: string,
+    @Param('slug') slug: string,
+  ): Promise<GetCardDetails> {
+    const card = await this.cardsService.getCardDetails(
+      toLanguageEnum(lang),
+      slug,
+    );
+
+    if (!card) {
+      throw new NotFoundException();
+    }
+
+    return {
+      name: card.name,
+      suit: card.card.suit,
+      rank: card.card.rank,
+      imageUrl: card.card.magisterCardImages[0].imageUrl,
+      shortDescription: card.card.magisterCardDescriptions[0].shortDescription,
+      longDescription: card.card.magisterCardDescriptions[0].longDescription,
+      divinatoryMeaning:
+        card.card.magisterCardDivinations[0]?.divinatoryMeaning,
+      divinatoryInterpretation:
+        card.card.magisterCardDivinations[0]?.divinatoryInterpretation,
+    };
   }
 }
