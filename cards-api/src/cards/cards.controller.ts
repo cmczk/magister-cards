@@ -3,6 +3,7 @@ import { CardsService } from './cards.service';
 import { GetRandomCardDto } from './dto/get-random-card.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { toLanguageEnum } from 'src/utils/language';
+import { GetCardForWikiDto } from './dto/get-card-for-wiki.dto';
 
 @Controller('cards')
 export class CardsController {
@@ -68,5 +69,26 @@ export class CardsController {
       slug: card.magisterCardNames[0].slug,
       shortDescription: card.magisterCardDescriptions[0].shortDescription,
     };
+  }
+
+  @ApiOperation({ summary: 'Получить все карты для энциклопедии' })
+  @ApiResponse({
+    status: 200,
+    description: 'Успешно возвращает все карты',
+    type: [GetCardForWikiDto],
+  })
+  @Get(':lang')
+  async getAllCards(@Param('lang') lang: string): Promise<GetCardForWikiDto[]> {
+    const cards = await this.cardsService.getAllCards(toLanguageEnum(lang));
+
+    return cards.map((card) => ({
+      id: card.id,
+      suit: card.suit,
+      rank: card.rank,
+      name: card.magisterCardNames[0].name,
+      slug: card.magisterCardNames[0].slug,
+      shortDescription: card.magisterCardDescriptions[0].shortDescription,
+      imageUrl: card.magisterCardImages[0].imageUrl,
+    }));
   }
 }

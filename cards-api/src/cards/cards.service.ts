@@ -20,6 +20,46 @@ export class CardsService {
     return this.getRandomCard(null, lang);
   }
 
+  async getAllCards(lang: Language) {
+    return await this.prisma.magisterCard.findMany({
+      select: {
+        id: true,
+        suit: true,
+        rank: true,
+        magisterCardNames: {
+          where: {
+            language: lang,
+          },
+          select: {
+            name: true,
+            slug: true,
+          },
+        },
+        magisterCardDescriptions: {
+          where: {
+            language: lang,
+          },
+          select: {
+            shortDescription: true,
+          },
+        },
+        magisterCardImages: {
+          where: {
+            deckType: {
+              name: 'METAPHORICAL',
+            },
+          },
+          select: {
+            imageUrl: true,
+          },
+        },
+      },
+      orderBy: {
+        id: 'asc',
+      },
+    });
+  }
+
   private async getRandomCard(seed: string | null, lang: Language) {
     const id = !seed
       ? randomInt(1, this.cardsInDeck + 1)
