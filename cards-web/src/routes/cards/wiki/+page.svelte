@@ -41,7 +41,7 @@
 					<div class="card-body">
 						<h5 class="card-title">{card.name}</h5>
 						<p class="card-text">{card.shortDescription}</p>
-						<a href="cards/{card.slug}" class="btn btn-primary">Подробнее</a>
+						<a href="/cards/wiki/{card.slug}" class="btn btn-primary">Подробнее</a>
 					</div>
 				</div>
 			</li>
