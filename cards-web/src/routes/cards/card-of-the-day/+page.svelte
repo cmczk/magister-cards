@@ -25,6 +25,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Карта Дня | Magister's Cards</title>
+</svelte:head>
+
 <h1 class="card-of-the-day-h-one">Карта Дня</h1>
 
 {#await data}

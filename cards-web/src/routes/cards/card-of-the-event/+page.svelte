@@ -29,7 +29,11 @@
 	};
 </script>
 
-<h1 class="card-of-the-day-h-one">Карта Дня</h1>
+<svelte:head>
+	<title>Карта События | Magister's Cards</title>
+</svelte:head>
+
+<h1 class="card-of-the-day-h-one">Карта События</h1>
 
 {#await data}
 	<p>Загрузка...</p>
