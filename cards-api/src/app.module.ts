@@ -4,6 +4,8 @@ import { CardsModule } from './cards/cards.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AdminsModule } from './admins/admins.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -15,8 +17,14 @@ import { AdminsModule } from './admins/admins.module';
         index: false,
       },
     }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.SECRET_KEY,
+      signOptions: { expiresIn: '12h' },
+    }),
     CardsModule,
     AdminsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
