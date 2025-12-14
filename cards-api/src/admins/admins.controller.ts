@@ -43,6 +43,8 @@ export class AdminsController {
     @Body() data: LoginAdminDto,
     @Res({ passthrough: true }) response: Response,
   ) {
+    console.debug(data);
+
     const authData = await this.authService.loginAdmin(
       data.email,
       data.password,

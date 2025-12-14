@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
 	const API_URL = import.meta.env.VITE_API_URL;
 
 	interface CardForWiki {
@@ -10,6 +13,16 @@
 		shortDescription: string;
 		imageUrl: string;
 	}
+
+	onMount(async () => {
+		const resp = await fetch(`${API_URL}/admins/me`, {
+			credentials: 'include',
+		});
+
+		if (!resp.ok) {
+			goto('/');
+		}
+	});
 
 	const getAllCards = async (): Promise<CardForWiki[]> => {
 		const resp = await fetch(`${API_URL}/cards/be`);
@@ -44,7 +57,7 @@
 							<h5>{card.name}</h5>
 							<p>{card.shortDescription}</p>
 						</div>
-						<a href="/admins/cards/{card.id}" class="edit-card-link">Редактировать</a>
+						<a href="/admins/cards/{card.id}/edit" class="edit-card-link">Редактировать</a>
 					</div>
 				</div>
 			</li>
