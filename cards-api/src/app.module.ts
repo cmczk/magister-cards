@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CardsModule } from './cards/cards.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AdminsModule } from './admins/admins.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { join } from 'path';
       },
     }),
     CardsModule,
+    AdminsModule,
   ],
   controllers: [],
   providers: [],

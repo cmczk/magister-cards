@@ -34,6 +34,6 @@
 
 	.main {
 		flex: 1;
-		margin: 30px;
+		margin: clamp(10px, 1.56vw, 30px);
 	}
 </style>
