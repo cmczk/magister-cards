@@ -39,9 +39,9 @@
 	<h2>Полное описание</h2>
 	<p>{card.longDescription}</p>
 	<h2>Гадательное значение</h2>
-	<p></p>
+	<p>{card.divinatoryMeaning}</p>
 	<h2>Интерпретация гадательного значения</h2>
-	<p></p>
+	<p>{card.divinatoryInterpretation}</p>
 {/await}
 
 <style>

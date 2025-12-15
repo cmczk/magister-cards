@@ -38,7 +38,6 @@ export class UpdateCardDto {
   shortDescriptionBe: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   longDescriptionBe: string;
 
@@ -49,7 +48,6 @@ export class UpdateCardDto {
   shortDescriptionRu: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   longDescriptionRu: string;
 
@@ -60,37 +58,30 @@ export class UpdateCardDto {
   shortDescriptionEn: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   longDescriptionEn: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(1000)
   divinatoryMeaningBe: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   divinatoryInterpretationBe: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(1000)
   divinatoryMeaningRu: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   divinatoryInterpretationRu: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(1000)
   divinatoryMeaningEn: string;
 
   @ApiProperty()
-  @MinLength(2)
   @MaxLength(5000)
   divinatoryInterpretationEn: string;
 }
