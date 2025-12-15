@@ -61,7 +61,7 @@ export class CardsService {
   }
 
   async getCardDetails(lang: Language, slug: string) {
-    return await this.prisma.magisterCardName.findUnique({
+    return await this.prisma.magisterCardName.findFirst({
       where: {
         slug: slug,
         language: lang,

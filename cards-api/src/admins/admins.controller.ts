@@ -5,6 +5,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Req,
   Res,
@@ -19,6 +20,7 @@ import type { Request, Response } from 'express';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { GetCardForUpdateDto } from './dto/get-card-for-update.dto';
 import { Language } from 'src/generated/prisma/enums';
+import { UpdateCardDto } from './dto/update-card.dto';
 
 @Controller('admins')
 export class AdminsController {
@@ -93,16 +95,24 @@ export class AdminsController {
       divinatoryMeaningEn:
         card.magisterCardDivinations.find((div) => div.language === Language.EN)
           ?.divinatoryMeaning ?? '',
-      divinatoryInterpretionBe:
+      divinatoryInterpretationBe:
         card.magisterCardDivinations.find((div) => div.language === Language.BE)
           ?.divinatoryInterpretation ?? '',
-      divinatoryInterpretionRu:
+      divinatoryInterpretationRu:
         card.magisterCardDivinations.find((div) => div.language === Language.RU)
           ?.divinatoryInterpretation ?? '',
-      divinatoryInterpretionEn:
+      divinatoryInterpretationEn:
         card.magisterCardDivinations.find((div) => div.language === Language.EN)
           ?.divinatoryInterpretation ?? '',
     };
+  }
+
+  @Patch('cards/:id/edit')
+  async updateCard(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateCardDto,
+  ) {
+    await this.adminsService.updateCard(id, data);
   }
 
   @Post('create')

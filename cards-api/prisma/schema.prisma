@@ -28,7 +28,7 @@ model MagisterCard {
 model MagisterCardName {
   id       Int      @id @default(autoincrement())
   name     String // @db.VarChar(250)
-  slug     String   @unique // @db.VarChar(300)
+  slug     String // @db.VarChar(300)
   language Language
 
   magisterCardId Int          @map("magister_card_id")
@@ -38,6 +38,7 @@ model MagisterCardName {
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
+  @@unique([magisterCardId, language])
   @@map("magister_cards_names")
 }
 
@@ -54,6 +55,7 @@ model MagisterCardDescription {
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
+  @@unique([magisterCardId, language])
   @@map("magister_cards_descriptions")
 }
 
@@ -70,6 +72,7 @@ model MagisterCardDivination {
   updatedAt DateTime  @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
+  @@unique([magisterCardId, language])
   @@map("magister_cards_divinations")
 }
 
