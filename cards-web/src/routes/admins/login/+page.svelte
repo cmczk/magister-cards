@@ -32,9 +32,11 @@
 					submitError = 'Что-то пошло не так, попробуй ещё раз';
 					break;
 			}
+
+			return;
 		}
 
-		goto('/admins/cards');
+		goto('/admins');
 	};
 </script>
 

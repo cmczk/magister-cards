@@ -134,6 +134,12 @@ export class AdminsController {
   }
 
   @UseGuards(AuthGuard)
+  @Post('logout')
+  logoutAdmin(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('attn');
+  }
+
+  @UseGuards(AuthGuard)
   @Get('me')
   me(@Req() request: Request) {
     return request.user;

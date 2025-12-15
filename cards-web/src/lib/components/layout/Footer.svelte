@@ -5,7 +5,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: antiquewhite;
 		padding-block: 20px;
 	}
 </style>
