@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { getRankName, getSuitName } from '$lib/utils/enums';
 
 	const API_URL = import.meta.env.VITE_API_URL;
 
@@ -30,9 +31,9 @@
 		/>
 	</div>
 	<h2>Масть</h2>
-	<p>{card.suit}</p>
+	<p>{getSuitName(card.suit)}</p>
 	<h2>Ранг</h2>
-	<p>{card.rank}</p>
+	<p>{getRankName(card.rank)}</p>
 	<h2>Краткое описание</h2>
 	<p>{card.shortDescription}</p>
 	<h2>Полное описание</h2>

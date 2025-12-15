@@ -1,4 +1,7 @@
 <script lang="ts">
+	import type { RANKS, SUITS } from '$lib/utils/enums';
+	import { getSuitName, getRankName } from '$lib/utils/enums';
+
 	const API_URL = import.meta.env.VITE_API_URL;
 
 	interface CardOfTheEvent {
@@ -7,8 +10,8 @@
 		slug: string;
 		imageUrl: string;
 		coverUrl: string;
-		suit: string;
-		rank: string;
+		suit: keyof typeof SUITS;
+		rank: keyof typeof RANKS;
 		shortDescription: string;
 	}
 
@@ -66,9 +69,9 @@
 
 					<div class="card-text-wrapper">
 						<p class="card-text-head">Масть:</p>
-						<p>{card.suit}</p>
+						<p>{getSuitName(card.suit)}</p>
 						<p class="card-text-head">Ранг:</p>
-						<p>{card.rank}</p>
+						<p>{getRankName(card.rank)}</p>
 						<p class="card-text-head">Описание:</p>
 						<p>{card.shortDescription}</p>
 					</div>
