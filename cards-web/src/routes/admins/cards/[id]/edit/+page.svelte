@@ -76,7 +76,7 @@
 </script>
 
 <svelte:head>
-	<title>Редактирование</title>
+	<title>{card?.nameRu} | Редактирование</title>
 </svelte:head>
 
 {#if loading}
