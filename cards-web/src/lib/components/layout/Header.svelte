@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { page } from '$app/state';
+</script>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">Magister's Card</a>
@@ -15,16 +19,29 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/">Главная</a>
+					<a
+						class="nav-link {page.url.pathname === '/' ? 'active' : ''}"
+						aria-current="page"
+						href="/">Главная</a
+					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/cards/card-of-the-day">Карта дня</a>
+					<a
+						class="nav-link {page.url.pathname === '/cards/card-of-the-day' ? 'active' : ''}"
+						href="/cards/card-of-the-day">Карта дня</a
+					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/cards/card-of-the-event">Карта события</a>
+					<a
+						class="nav-link {page.url.pathname === '/cards/card-of-the-event' ? 'active' : ''}"
+						href="/cards/card-of-the-event">Карта события</a
+					>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/cards/wiki">Энциклопедия карт</a>
+					<a
+						class="nav-link {page.url.pathname === '/cards/wiki' ? 'active' : ''}"
+						href="/cards/wiki">Энциклопедия карт</a
+					>
 				</li>
 			</ul>
 		</div>
